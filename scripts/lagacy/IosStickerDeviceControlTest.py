@@ -6,6 +6,8 @@ import time
 from appium import webdriver
 from appium.webdriver.common.touch_action import TouchAction
 from lib import HTMLTestReport
+import pandas as pd
+
 
 class IosStickerDeviceControlTest(unittest.TestCase):
     """ Yuki Demo: dev Y-3 카테고리 스티커 적용테스트"""

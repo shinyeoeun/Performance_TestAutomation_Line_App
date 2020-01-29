@@ -14,18 +14,11 @@ import pandas as pd
 from pylab import *
 
 SWIPE_DURATION_DEFAULT = 2800
-
 MEMORY = []
 MEMORY_PSS_TOTAL_VALUE = []
 MEMORY_PSS_TOTAL_VALUE_LIST = []
-
 TIME_SEC = []
 TIME_OUT = [1]
-
-CPU = []
-CPU_VALUE = []
-CPU_VALUE_LIST = []
-
 PACKAGE = "com.linecorp.yuki"
 #STICKER_ID_LIST = ["61609", "62141", "61958", "62638", "60847", "60763", "60143", "60844", "61771", "61800"]
 STICKER_ID_LIST = ["61609", "62141"]
@@ -71,7 +64,7 @@ def test_main (udid, system_port, device_name):
     tapTargetCategory(driver, int(CATEGORY_INDEX))
 
     # 메모리측정 Thread 개시
-    t1 = Thread(target=getPerformanceValue_thread, args=(driver, 300))
+    t1 = Thread(target=getPerformanceValue_thread, args=(driver, 60))
     t1.start()
 
     for i in range(len(STICKER_ID_LIST)):
@@ -114,17 +107,16 @@ def getPerformanceValue_thread(driver, roopCount):
     print("[LOG]=============== resource measurement start ===============")
     for index in range(roopCount):
         TIME_SEC.append(time.strftime("%H:%M:%S"))
-        # CPU = driver.get_performance_data(PACKAGE, 'cpuinfo', 5)
-
-        CPU.append(os.popen("adb shell top -n 1 | findstr com.linecorp.yu+").readline().split()[9].strip(' '))
-        # CPU.append(os.popen("adb shell top -n 1 | findstr com.linecorp.yu+").readline().split()[9].strip(' ').split(".")[0])
-
+        MEMORY_LIST = driver.get_performance_data(PACKAGE, "memoryinfo", TIME_OUT)
+        MEMORY_PSS_TOTAL_VALUE = MEMORY_LIST[1]
+        MEMORY_PSS_TOTAL_VALUE_LIST.append(int(MEMORY_PSS_TOTAL_VALUE[5]))
         print("[LOG] Memory data: " + MEMORY_PSS_TOTAL_VALUE[5])
     print("[LOG]=============== resource measurement end ===============")
 
+
 def getRawData(TIME_SEC, MEMORY_PSS_TOTAL_VALUE_LIST):
-    RAW_DATA = pd.DataFrame({'Time': TIME_SEC, 'RAM Usage(Total PSS(KB))': CPU_VALUE_LIST}, columns=['Time', 'RAM Usage(Total PSS(KB))'])
-    RAW_DATA.to_csv("sssss.csv", index=False)
+    RAW_DATA = pd.DataFrame({'Time': TIME_SEC, 'RAM Usage(Total PSS(KB))': MEMORY_PSS_TOTAL_VALUE_LIST}, columns=['Time', 'RAM Usage(Total PSS(KB))'])
+    RAW_DATA.to_csv("YukiSdkMemoryRawData.csv", index=False)
     return RAW_DATA
 
 def getCurrentTime():
@@ -135,7 +127,8 @@ def generateGraph():
 
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
-    ax.set_xticks([0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300])
+    ax.set_xticks([0, 30, 60])
+    #ax.set_xticks(np.arange(len(MEMORY_PSS_TOTAL_VALUE_LIST)))
     ax.set_xticklabels(STICKER_ID_LIST, rotation=45)
     ax.set_title('Yuki SDK Memory Usag:Total PSS(KB)')
     ax.set_ylabel('Total PSS(KB)')

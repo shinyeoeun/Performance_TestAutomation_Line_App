@@ -75,11 +75,11 @@ class StressTestCase(unittest.TestCase):
             for i in range(5):
                 time.sleep(5)
                 # 동영상 촬영 개시
-                TouchAction(self.driver).tap(None, 550, 1950, 1).perform()
+                self.actions.tap(None, 550, 1950, 1).perform()
                 # 3초간 대기
                 time.sleep(3)
                 # 동영상 촬영 종료
-                TouchAction(self.driver).tap(None, 550, 1950, 1).perform()
+                self.actions.tap(None, 550, 1950, 1).perform()
 
         except Exception:
             self.daf.get_logcat(self.driver)
@@ -112,28 +112,28 @@ class StressTestCase(unittest.TestCase):
 
         try:
             # 1.이펙트 N카테고리의 63158(돈다발)이펙트를 적용하고 사진촬영을 시작
-            TouchAction(self.driver).tap(
+            self.actions.tap(
                 self.driver.find_element_by_android_uiautomator('new UiSelector().text("'+self.STICKER_ID_LIST[0]+'")')).perform()
             self.driver.back()
-            TouchAction(self.driver).tap(
+            self.actions.tap(
                 self.driver.find_element_by_id("com.linecorp.yuki:id/record_animation")).perform()
-            TouchAction(self.driver).tap(None, 100, 1950, 1).perform()
+            self.actions.tap(None, 100, 1950, 1).perform()
 
             # 5.해당 스텝을 5회 반복
             for i in range(5):
                 # 2.이펙트 N카테고리의 60560 이펙트를 적용하고 사진촬영을 시작
-                TouchAction(self.driver).tap(self.driver.find_element_by_android_uiautomator('new UiSelector().text("'+self.STICKER_ID_LIST[1]+'")')).perform()
+                self.actions.tap(self.driver.find_element_by_android_uiautomator('new UiSelector().text("'+self.STICKER_ID_LIST[1]+'")')).perform()
                 self.driver.back()
-                TouchAction(self.driver).tap(self.driver.find_element_by_id("com.linecorp.yuki:id/record_animation")).perform()
+                self.actions.tap(self.driver.find_element_by_id("com.linecorp.yuki:id/record_animation")).perform()
                 time.sleep(4)
-                TouchAction(self.driver).tap(None, 100, 1950, 1).perform()
+                self.actions.tap(None, 100, 1950, 1).perform()
 
                 # 3.이펙트 N카테고리의 63158 이펙트를 다시 적용하고 사진촬영
-                TouchAction(self.driver).tap(self.driver.find_element_by_android_uiautomator('new UiSelector().text("'+self.STICKER_ID_LIST[0]+'")')).perform()
+                self.actions.tap(self.driver.find_element_by_android_uiautomator('new UiSelector().text("'+self.STICKER_ID_LIST[0]+'")')).perform()
                 self.driver.back()
-                TouchAction(self.driver).tap(self.driver.find_element_by_id("com.linecorp.yuki:id/record_animation")).perform()
+                self.actions.tap(self.driver.find_element_by_id("com.linecorp.yuki:id/record_animation")).perform()
                 time.sleep(4)
-                TouchAction(self.driver).tap(None, 100, 1950, 1).perform()
+                self.actions.tap(None, 100, 1950, 1).perform()
                 time.sleep(3)
 
         except Exception:
@@ -156,7 +156,7 @@ class StressTestCase(unittest.TestCase):
         try:
             for i in range(4):
                 for roop in range(3):
-                    TouchAction(self.driver).tap(self.driver.find_element_by_id("com.linecorp.yuki:id/ratio_button")).perform()
+                    self.actions.tap(self.driver.find_element_by_id("com.linecorp.yuki:id/ratio_button")).perform()
 
         except Exception:
             self.daf.get_logcat(self.driver)
@@ -177,7 +177,7 @@ class StressTestCase(unittest.TestCase):
         try:
             for i in range(4):
                 for roop in range(2):
-                    TouchAction(self.driver).tap(self.driver.find_element_by_id("com.linecorp.yuki:id/turn_button")).perform()
+                    self.actions.tap(self.driver.find_element_by_id("com.linecorp.yuki:id/turn_button")).perform()
                     time.sleep(2)
 
         except Exception:

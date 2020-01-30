@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import pytest
+import os
 from appium import webdriver
 import time
 import matplotlib.pyplot as plt
@@ -23,7 +24,8 @@ PACKAGE = "com.linecorp.yuki"
 STICKER_ID_LIST = ["61609", "62141", "61958", "62638", "60847", "60763", "60143", "60844", "61771", "61800"]
 #STICKER_ID_LIST = ["61609", "62141"]
 RAW_DATA = []
-
+CPU = []
+CPU_VALUE_LIST = []
 CATEGORY_INDEX = 18
 
 @pytest.mark.parametrize("udid, system_port, device_name", [
@@ -64,8 +66,10 @@ def test_main (udid, system_port, device_name):
     tapTargetCategory(driver, int(CATEGORY_INDEX))
 
     # 메모리측정 Thread 개시
-    t1 = Thread(target=getPerformanceValue_thread, args=(driver, 300))
-    t1.start()
+    thread_memory = Thread(target=getPerformanceValue_memory, args=(driver, 10))
+    thread_cpu = Thread(target=getPerformanceValue_cpu, args=(driver, 10))
+    thread_memory.start()
+    thread_cpu.start()
 
     for i in range(len(STICKER_ID_LIST)):
 
@@ -83,16 +87,15 @@ def test_main (udid, system_port, device_name):
             driver.find_element_by_id(PACKAGE + ":id/turn_button").click()
             time.sleep(2)
 
-        # 디바이스 Lock/Unlock
-        driver.lock(1)
-        driver.unlock()
-
     # 메모리측정 Thread 종료
-    t1.join()
+    thread_memory.join()
+    thread_cpu.join()
 
     driver.quit()
-    getRawData(TIME_SEC, MEMORY_PSS_TOTAL_VALUE_LIST)
-    generateGraph()
+    getRawDataMemory(TIME_SEC, MEMORY_PSS_TOTAL_VALUE_LIST)
+    getRawDataCpu(TIME_SEC, CPU_VALUE_LIST)
+    generateGraph_memory()
+    generateGraph_cpu()
 
 def tapTargetCategory(driver, index):
     sticker_parent = driver.find_element_by_id("com.linecorp.yuki:id/sticker_category_view")
@@ -103,7 +106,7 @@ def tapTargetSticker(driver, sticker_id):
     driver.find_element_by_android_uiautomator('new UiSelector().text("'+sticker_id+'")').click()
     driver.back()
 
-def getPerformanceValue_thread(driver, roopCount):
+def getPerformanceValue_memory(driver, roopCount):
     print("[LOG]=============== resource measurement start ===============")
     for index in range(roopCount):
         TIME_SEC.append(time.strftime("%H:%M:%S"))
@@ -113,25 +116,47 @@ def getPerformanceValue_thread(driver, roopCount):
         print("[LOG] Memory data: " + MEMORY_PSS_TOTAL_VALUE[5])
     print("[LOG]=============== resource measurement end ===============")
 
+def getPerformanceValue_cpu(driver, roopcount):
+    print("[LOG]=============== resource measurement start ===============")
+    for index in range(roopcount):
+        TIME_SEC.append(time.strftime("%H:%M:%S"))
+        CPU_LIST = os.popen("adb shell top -n 1 | findstr com.linecorp.yu+").readline().split()[8]
+        CPU_VALUE_LIST.append(CPU_LIST)
+        print("[LOG] CPU data: " + CPU_LIST)
+    print("[LOG]=============== resource measurement end ===============")
 
-def getRawData(TIME_SEC, MEMORY_PSS_TOTAL_VALUE_LIST):
+def getRawDataMemory(TIME_SEC, MEMORY_PSS_TOTAL_VALUE_LIST):
     RAW_DATA = pd.DataFrame({'Time': TIME_SEC, 'RAM Usage(Total PSS(KB))': MEMORY_PSS_TOTAL_VALUE_LIST}, columns=['Time', 'RAM Usage(Total PSS(KB))'])
-    RAW_DATA.to_csv("YukiSdkMemoryRawData.csv", index=False)
-    return RAW_DATA
+    RAW_DATA.to_csv("yuki_memory_raw_data.csv", index=False)
+
+def getRawDataCpu(TIME_SEC, CPU_VALUE_LIST):
+    RAW_DATA = pd.DataFrame({'Time': TIME_SEC, 'cpu': CPU_VALUE_LIST}, columns=['Time', 'cpu'])
+    RAW_DATA.to_csv("yuki_cpu_raw_data.csv", index=False)
 
 def getCurrentTime():
     currentTime = time.strftime("%H:%M:%S")
     return currentTime
 
-def generateGraph():
-
+def generateGraph_memory():
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
-    ax.set_xticks([0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300])
+    ax.set_xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     #ax.set_xticks(np.arange(len(MEMORY_PSS_TOTAL_VALUE_LIST)))
     ax.set_xticklabels(STICKER_ID_LIST, rotation=45)
-    ax.set_title('Yuki SDK Memory Usag:Total PSS(KB)')
-    ax.set_ylabel('Total PSS(KB)')
+    ax.set_title('Yuki SDK Memory Usage')
+    ax.set_ylabel('PSS(KB)')
     ax.set_xlabel('Sticker ID')
     ax.plot(MEMORY_PSS_TOTAL_VALUE_LIST)
+    plt.show()
+
+def generateGraph_cpu():
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    #ax.set_xticks([0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300])
+    ax.set_xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    ax.set_xticklabels(STICKER_ID_LIST, rotation=45)
+    ax.set_title('Yuki SDK CPU Usage')
+    ax.set_ylabel('CPU(%)')
+    ax.set_xlabel('Sticker ID')
+    ax.plot(CPU)
     plt.show()

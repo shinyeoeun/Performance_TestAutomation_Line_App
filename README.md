@@ -4,6 +4,7 @@ Android App의 성능데이터(Memory)를 수집하여 Raw Data취득 및 시각
 ## 테스트 시나리오
 * 메모리 변동추이 확인을 위해 메모리 소요가 심한 In-App카메라 촬영 시나리오로 구성함
 * 상세 시나리오는 아래 영상참조
+
 ![demo](https://user-images.githubusercontent.com/25470405/75669744-e5f80600-5cbe-11ea-8b98-4fe3069840e7.gif)
 
 

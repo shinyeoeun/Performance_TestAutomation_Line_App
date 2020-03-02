@@ -57,7 +57,7 @@ def getPerformanceValue_memory(driver, sec):
 
 ![2020-03-02_18h51_11](https://user-images.githubusercontent.com/25470405/75665046-de346380-5cb6-11ea-8823-732dfc083236.png)
 
-※ Pss Total: 프로세스의 실제 RAM가중치와 다른 프로세스의 RAM사용량 및 사용가능한 전체 RAM에 대해 비교하기 위한 지표
+※ Pss Total: 프로세스의 실제 RAM값과 다른 프로세스의 RAM사용량 및 사용가능한 전체 RAM값을 비교하기 위한 지표
 
 
 ## 파일 구조

@@ -1,4 +1,4 @@
-# performanceTestLab
+# performance Test Lab
 Android App의 성능데이터(Memory)를 수집하여 Raw Data(CSV) 취득 및 시각화하는 스크립트 
 
 ## 테스트 시나리오

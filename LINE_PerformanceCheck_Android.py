@@ -88,19 +88,17 @@ def getPerformanceValue_memory(driver, sec):
 
 # 로우데이터 CSV작성
 def getRawDataMemory():
-    raw_data = pd.DataFrame({'Time': TIME_SEC,'RAM Usage(Total PSS(KB))': MEMORY_PSS_TOTAL_VALUE_LIST}, columns=['Time', 'RAM Usage(Total PSS(KB))'])
+    raw_data = pd.DataFrame({'Time': TIME_SEC,'RAM Usage(Total PSS(KB))': MEMORY_PSS_TOTAL_VALUE_LIST}, columns=['Time', 'Total PSS(KB)'])
     raw_data.to_csv("LINE_ChatRoom_memory_raw_data_" + BUILD_VERSION + ".csv", index=False)
 
 # 메모리 그래프 작성
 def generateGraph_memory():
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
-
     ax.plot(TIME_SEC, MEMORY_PSS_TOTAL_VALUE_LIST)
     ax.set_title('LINE Chat Room Memory Check(Build Ver:' + BUILD_VERSION + ')')
     ax.set_ylabel('Total PSS(KB)')
     ax.set_xlabel('TIME(sec)')
     ax.grid(True)
-
     plt.xticks(TIME_SEC, rotation='vertical')
     plt.show()

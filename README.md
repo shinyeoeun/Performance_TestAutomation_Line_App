@@ -61,8 +61,7 @@ def getPerformanceValue_memory(driver, sec):
 
 
 ## 파일 구조
-![2020-03-02_18h40_59](https://user-images.githubusercontent.com/25470405/75664463-dd4f0200-5cb5-11ea-9df8-61e57508c27a.png)
-
+![2020-03-02_18h40_59](https://user-images.githubusercontent.com/25470405/75667991-e93dc280-5cbb-11ea-83b2-c6ac683c4efd.png)
 
 ## 사용 예제
 1. Appium 서버 기동

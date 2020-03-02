@@ -6,12 +6,10 @@ Android App의 성능데이터(Memory)를 수집하여 Raw Data취득 및 시각
 * 상세 시나리오는 아래 영상참조
 
 ## 테스트 결과
-* Memory 사용량 그래프
-
+##### Memory 사용량 그래프
 ![2020-03-02_18h14_58](https://user-images.githubusercontent.com/25470405/75662022-c0b0cb00-5cb1-11ea-9a2e-c11e7329027a.png)
 
-* Memory 사용량 Raw Data (csv)
-
+#####  Memory 사용량 Raw Data (csv)
 ![2020-03-02_19h20_13](https://user-images.githubusercontent.com/25470405/75667352-de366280-5cba-11ea-9f60-0ebcb06e1f58.png)
 
 

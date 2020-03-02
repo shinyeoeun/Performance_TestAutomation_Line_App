@@ -1,5 +1,5 @@
 # performance Test Lab
-Android App의 성능데이터(Memory)를 수집하여 Raw Data(CSV) 취득 및 시각화하는 스크립트 
+Android App의 성능데이터(Memory)를 수집하여 Raw Data 취득 및 시각화하는 스크립트 
 
 ## 테스트 시나리오
 * 메모리 변동추이를 확인하기 위해, 메모리 소요가 심한 카메라 촬영 + 스티커 적용시의 시나리오로 구성함

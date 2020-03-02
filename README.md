@@ -37,15 +37,15 @@ def getPerformanceValue_memory(driver, sec):
 5. 테스트 시나리오 수행 도중 수집한 RAM 값들로 그래프 작성(matplotlib pylab)
 ```python
     def generateGraph_memory():
-    fig = plt.figure()
-    ax = fig.add_subplot(1, 1, 1)
-    ax.plot(TIME_SEC, MEMORY_PSS_TOTAL_VALUE_LIST)
-    ax.set_title('LINE Chat Room Memory Check(Build Ver:' + BUILD_VERSION + ')')
-    ax.set_ylabel('Total PSS(KB)')
-    ax.set_xlabel('TIME(sec)')
-    ax.grid(True)
-    plt.xticks(TIME_SEC, rotation='vertical')
-    plt.show()
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
+        ax.plot(TIME_SEC, MEMORY_PSS_TOTAL_VALUE_LIST)
+        ax.set_title('LINE Chat Room Memory Check(Build Ver:' + BUILD_VERSION + ')')
+        ax.set_ylabel('Total PSS(KB)')
+        ax.set_xlabel('TIME(sec)')
+        ax.grid(True)
+        plt.xticks(TIME_SEC, rotation='vertical')
+        plt.show()
 ```
 6. 마찬가지로 수집한 값으로 Raw Data작성(pandas dataframe)
 ```python

@@ -14,7 +14,7 @@ Android App의 성능데이터(Memory)를 수집하여 Raw Data취득 및 시각
 
 
 ## 동작 설명
-1. 아래와 같이 1초 간격으로 PSS Total값을 취득하는 메소드 작성
+1. 1초 간격으로 PSS Total값을 취득하는 메소드 작성
 ```python
 def getPerformanceValue_memory(driver, sec):
     for i in range(sec):

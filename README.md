@@ -25,8 +25,24 @@ def getPerformanceValue_memory(driver, sec):
     thread_memory.join()
 ```
 5. 테스트 시나리오 수행 도중 수집한 RAM 값들로 그래프 작성(matplotlib pylab)
+```python
+    def generateGraph_memory():
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.plot(TIME_SEC, MEMORY_PSS_TOTAL_VALUE_LIST)
+    ax.set_title('LINE Chat Room Memory Check(Build Ver:' + BUILD_VERSION + ')')
+    ax.set_ylabel('Total PSS(KB)')
+    ax.set_xlabel('TIME(sec)')
+    ax.grid(True)
+    plt.xticks(TIME_SEC, rotation='vertical')
+    plt.show()
+```
 6. 마찬가지로 수집한 값으로 Raw Data작성(pandas dataframe)
-
+```python
+    def getRawDataMemory():
+        raw_data = pd.DataFrame({'Time': TIME_SEC,'RAM Usage(Total PSS(KB))': MEMORY_PSS_TOTAL_VALUE_LIST}, columns=['Time', 'RAM Usage(Total PSS(KB))'])
+        raw_data.to_csv("LINE_ChatRoom_memory_raw_data_" + BUILD_VERSION + ".csv", index=False)
+```
 * 측정값 상세
 
 ![2020-03-02_18h51_11](https://user-images.githubusercontent.com/25470405/75665046-de346380-5cb6-11ea-8823-732dfc083236.png)

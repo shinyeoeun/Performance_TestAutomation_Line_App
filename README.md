@@ -79,5 +79,5 @@ pytest -n 1 LINE_PerformanceCheck_Android.py
 
 
 ## 참고자료
-https://appiumpro.com/editions/5
-https://blog.naver.com/wisestone2007/221321329618
+* https://appiumpro.com/editions/5
+* https://blog.naver.com/wisestone2007/221321329618

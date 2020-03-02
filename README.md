@@ -1,8 +1,18 @@
 # performance Test Lab
 Android App의 성능데이터(Memory)를 수집하여 Raw Data취득 및 시각화하는 스크립트 
 
-## 동작 설명
+## 테스트 시나리오
+* 메모리 변동추이를 확인하기 위해, 메모리 소요가 심한 카메라 촬영 + 스티커 적용시의 시나리오로 구성함
+* 상세 시나리오는 아래 영상참조
 
+## 테스트 결과
+* Memory 사용량 그래프
+![2020-03-02_18h14_58](https://user-images.githubusercontent.com/25470405/75662022-c0b0cb00-5cb1-11ea-9a2e-c11e7329027a.png)
+* Memory 사용량 Raw Data (csv)
+![2020-03-02_19h20_13](https://user-images.githubusercontent.com/25470405/75667352-de366280-5cba-11ea-9f60-0ebcb06e1f58.png)
+
+
+## 동작 설명
 1. 아래와 같이 1초 간격으로 PSS Total값을 취득하는 메소드 작성
 ```python
 def getPerformanceValue_memory(driver, sec):
@@ -13,7 +23,6 @@ def getPerformanceValue_memory(driver, sec):
         MEMORY_PSS_TOTAL_VALUE_LIST.append(int(MEMORY_PSS_TOTAL_VALUE[5]))
         time.sleep(1)
 ```
-
 2. LINE기동 직후부터 위 메소드를 Thread로 호출한뒤 측정시간(초)을 인수로 넘김
 ```python
     thread_memory = Thread(target=getPerformanceValue_memory, args=(driver, 35))
@@ -48,17 +57,6 @@ def getPerformanceValue_memory(driver, sec):
 ![2020-03-02_18h51_11](https://user-images.githubusercontent.com/25470405/75665046-de346380-5cb6-11ea-8823-732dfc083236.png)
 
 ※ Pss Total: 프로세스의 실제 RAM가중치와 다른 프로세스의 RAM사용량 및 사용가능한 전체 RAM에 대해 비교하기 위한 지표
-
-
-## 테스트 시나리오
-* 메모리 변동추이를 확인하기 위해, 메모리 소요가 심한 카메라 촬영 + 스티커 적용시의 시나리오로 구성함
-* 상세 시나리오는 아래 영상참조
-
-
-## 테스트 결과
-![2020-03-02_18h14_58](https://user-images.githubusercontent.com/25470405/75662022-c0b0cb00-5cb1-11ea-9a2e-c11e7329027a.png)
-
-* 카메라 기동후 20초간 메모리가 증가하였다가 카메라가 종료된 뒤 5초간 다시 정상화 
 
 
 ## 파일 구조

@@ -17,6 +17,13 @@ Android App의 성능데이터(Memory)를 수집하여 Raw Data취득 및 시각
 ![2020-03-02_19h20_13](https://user-images.githubusercontent.com/25470405/75667679-67e63000-5cbb-11ea-8660-c0482ae2386f.png)
 
 
+* 측정값 상세
+
+![2020-03-02_18h51_11](https://user-images.githubusercontent.com/25470405/75665046-de346380-5cb6-11ea-8823-732dfc083236.png)
+
+※ Pss Total: 프로세스의 실제 RAM값과 다른 프로세스의 RAM사용량 및 사용가능한 전체 RAM값을 비교하기 위한 지표
+
+
 ## 동작 설명
 1. PSS Total값을 1초간격으로 취득하는 메소드 작성
 ```python
@@ -57,11 +64,6 @@ def getPerformanceValue_memory(driver, sec):
         raw_data = pd.DataFrame({'Time': TIME_SEC,'RAM Usage(Total PSS(KB))': MEMORY_PSS_TOTAL_VALUE_LIST}, columns=['Time', 'RAM Usage(Total PSS(KB))'])
         raw_data.to_csv("LINE_ChatRoom_memory_raw_data_" + BUILD_VERSION + ".csv", index=False)
 ```
-* 측정값 상세
-
-![2020-03-02_18h51_11](https://user-images.githubusercontent.com/25470405/75665046-de346380-5cb6-11ea-8823-732dfc083236.png)
-
-※ Pss Total: 프로세스의 실제 RAM값과 다른 프로세스의 RAM사용량 및 사용가능한 전체 RAM값을 비교하기 위한 지표
 
 
 ## 파일 구조

@@ -7,7 +7,7 @@ Android App의 성능데이터(Memory)를 수집하여 Raw Data취득 및 시각
 ### Scenario
 LINE 앱 기동 > 프로필사진 변경 > 카메라촬영 > 필터적용 > 30초간 대기 > 카메라종료 > 앱 종료
 
-동작영상
+### 동작영상
 
 ![demo](https://user-images.githubusercontent.com/25470405/75669744-e5f80600-5cbe-11ea-8b98-4fe3069840e7.gif)
 

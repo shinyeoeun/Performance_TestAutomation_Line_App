@@ -95,7 +95,7 @@ pytest -n 1 LINE_PerformanceCheck_Android.py
 * Capturing Performance Data for Native iOS Apps
 > https://appiumpro.com/editions/12
 
-* RAM 사용량 측정 - Android 'dumpsys'도구를 이용한 모바일 앱 성능 테스트
+* Android 'dumpsys'도구를 이용한 모바일 앱 성능 테스트
 > https://blog.naver.com/wisestone2007/221321329618
 
 * 파이썬 멀티 쓰레드(thread)와 멀티 프로세스(process)

@@ -88,5 +88,12 @@ pytest -n 1 LINE_PerformanceCheck_Android.py
 
 
 ## Reference
-* https://appiumpro.com/editions/5
-* https://blog.naver.com/wisestone2007/221321329618
+
+* Performance Testing of Android Apps
+> https://appiumpro.com/editions/5
+
+* RAM 사용량 측정 - Android 'dumpsys'도구를 이용한 모바일 앱 성능 테스트
+> https://blog.naver.com/wisestone2007/221321329618
+
+* 파이썬 멀티 쓰레드(thread)와 멀티 프로세스(process)
+> https://monkey3199.github.io/develop/python/2018/12/04/python-pararrel.html

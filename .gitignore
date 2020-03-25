@@ -1,5 +1,16 @@
+##############################
+## IntelliJ
+##############################
+out/
 .idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
 
+##############################
+## Python
+##############################
 # Byte-compiled / optimized / DLL files
 __pycache__/
 

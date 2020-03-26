@@ -85,9 +85,9 @@ matplotlib 라이브러리에서 유용하게 쓴 API 정리
 
 |API|Usage|Parameter|
 |------|------|------|
-|subplot|그래프 표시 위치 정의|int/int/int|행/열/인덱스|
-|grid|그리드 표시|boolean|표시여부:true/false|
-|legend|범례 표시|string|표시위치:upper right/upper center ...|
+|subplot|그래프 표시 위치 정의|int 행열인덱스|
+|grid|그리드 표시|boolean 표시여부|
+|legend|범례 표시|string 표시위치|
 
 ```python
         plt.figure(figsize=(10, 7)) # 캔버스 크기 정의

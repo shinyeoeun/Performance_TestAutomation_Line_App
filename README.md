@@ -72,6 +72,43 @@ def getPerformanceValue_memory(driver, sec):
         raw_data.to_csv("LINE_ChatRoom_memory_raw_data_" + BUILD_VERSION + ".csv", index=False)
 ```
 
+※ 같은 방식으로 디바이스 배터리정보(배터리 잔량/온도)도 취득할 수 있음 <br/>
+
+
+![addBattery](https://user-images.githubusercontent.com/25470405/77624041-8cfd5400-6f84-11ea-9201-2bab155abbf7.png)
+
+
+## Trouble Shooting
+
+* 데이터 시각화 관련
+matplotlib 라이브러리에서 유용하게 쓴 API 정리
+
+|API|Usage|Parameter|
+|------|------|------|
+|subplot|그래프 표시 위치 정의|int/int/int|행/열/인덱스|
+|grid|그리드 표시|boolean|표시여부:true/false|
+|legend|범례 표시|string|표시위치:upper right/upper center ...|
+
+```python
+        plt.figure(figsize=(10, 7)) # 캔버스 크기 정의
+        plt.style.use(['seaborn-dark']) # 테마
+
+        # 메모리 측정 데이터 그래프
+        plt.subplot(2, 1, 1) # 그래프 표시 위치
+        plt.grid() # 그리드 표시
+        plt.plot(self.X_Time, self.Y_Memory, color='b', marker='o', label='memory(MB)')
+        plt.ylabel("Memory")
+
+        # 배터리 측정 데이터 그래프
+        plt.subplot(2, 1, 2)
+        plt.plot(self.X_Time, self.Y_Battery, color='g', marker='o', label='Device Battery')
+        plt.plot(self.X_Time, self.Y_Temperature, color='y', marker='s', label='Device Temperature')
+        plt.grid(False) # 그리드 표시 안함
+        plt.legend(loc='upper right') # 범례 표시
+        plt.xlabel("Time")
+        plt.ylabel("Value")
+```
+
 
 ## Directory Structure
 ![2020-03-02_18h40_59](https://user-images.githubusercontent.com/25470405/75667991-e93dc280-5cbb-11ea-83b2-c6ac683c4efd.png)

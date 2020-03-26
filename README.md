@@ -74,8 +74,8 @@ def getPerformanceValue_memory(driver, sec):
 
 ※ 같은 방식으로 디바이스 배터리정보(배터리 잔량/온도)도 취득할 수 있음 <br/>
 
+![addBattery](https://user-images.githubusercontent.com/25470405/77627340-17948200-6f8a-11ea-976d-85e9ce1c5a01.png)
 
-![addBattery](https://user-images.githubusercontent.com/25470405/77624041-8cfd5400-6f84-11ea-9201-2bab155abbf7.png)
 
 
 ## Trouble Shooting
